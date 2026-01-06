@@ -42,7 +42,12 @@ for image_batch,label_batch in dataloader_test:
     print(label_batch.shape)
     break
 
+#gpuかcpuを自動的に選ぶ
+device='cuda'if torch.cuda.is_available() else'cpu'
+#モデルのインスタンスを作る
 model=models.MyModel()
+#モデルを選んだデバイスに転送する
+model.to(device)
 
 #acc_test=models.test_accuracy(model,dataloader_test)
 #print(f'test accuracy:{acc_test*100:.3f}%')
@@ -67,7 +72,7 @@ for epoch in range(n_epochs):
     time_start=time.time()
     train_loss=models.train(model,dataloader_train,loss_fn,optimizer)
     time_end=time.time()
-    print(f'validation loss:{train_loss}({time_end-time_start:.3f}s)')
+    print(f'training loss:{train_loss}({time_end-time_start:.3f}s)')
     train_loss_log.append(train_loss)
 
     time_start=time.time()
