@@ -67,7 +67,7 @@ for epoch in range(n_epochs):
     time_start=time.time()
     train_loss=models.train(model,dataloader_train,loss_fn,optimizer)
     time_end=time.time()
-    print(f'validation loss:{val_loss}({time_end-time_start:.3f}s)')
+    print(f'validation loss:{train_loss}({time_end-time_start:.3f}s)')
     train_loss_log.append(train_loss)
 
     time_start=time.time()
